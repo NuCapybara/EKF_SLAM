@@ -1,0 +1,2 @@
+/usr/bin/ar qc libturtlelib.a CMakeFiles/turtlelib.dir/src/geometry2d.cpp.o CMakeFiles/turtlelib.dir/src/se2d.cpp.o CMakeFiles/turtlelib.dir/src/svg.cpp.o CMakeFiles/turtlelib.dir/src/diff_drive.cpp.o
+/usr/bin/ranlib libturtlelib.a
