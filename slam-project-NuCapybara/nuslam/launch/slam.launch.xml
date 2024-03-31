@@ -1,0 +1,53 @@
+<launch>
+
+    <!-- Arguments -->
+    <arg name="cmd_src" default="circle"
+     description="Specifies which node publishes to the cmd_vel topic - circle, teleop, none"/>
+    <arg name="robot" default="nusim"
+     description="Where to launch the nodes - robot, nusim, nothing"/>
+    <arg name="use_rviz" default="true"
+     description="Specify if rviz needs to start - true, false"/>
+    <arg name="use_laser" default="false"
+     description="Specify whether circle fitting on laserscan is to be used - true, false"/>
+  
+    <!-- Argument to specify configuration file for simulator. -->
+    <arg name="world_config" default="basic_world.yaml" 
+    description=".yaml file to configure the world"/>
+
+    <!-- Argument to specify configuration file for robot. -->
+    <arg name="diff_config" default="diff_params.yaml" 
+    description=".yaml file to configure the robot"/>
+
+    <!-- Declare the RViz node and load the config file-->
+    <node name="rviz2" pkg="rviz2" exec="rviz2"
+          args="-d $(find-pkg-share nuslam)/config/nuslam_sim.rviz" if="$(eval '\'$(var use_rviz)\' == \'true\'')"/>
+  
+    <!-- Launch the Nusim simulation launch file -->
+    <include file="$(find-pkg-share nuturtle_control)/launch/start_robot.launch.xml">
+        <arg name="use_rviz" value="false"/>
+    </include>
+  
+    <!-- Slam node -->
+    <node pkg="nuslam" exec="nuslam" name="slam" output="screen">
+        <param from="$(find-pkg-share nuturtle_description)/$(var diff_config)"/>
+        <param from="$(find-pkg-share nusim)/config/$(var world_config)"/>
+        <param name="use_laser" value="$(var use_laser)"/>
+        <remap from="/joint_states" to="red/joint_states"/>
+        <param name="wheel_left" value="wheel_left_joint" />
+        <param name="wheel_right" value="wheel_right_joint" />
+        <param name="odom_id" value="green/odom" />
+        
+    </node>
+  
+    <!-- Static transform publisher between nusim/world and map tf frames -->
+    <node pkg="tf2_ros" exec="static_transform_publisher" name="nusim_world_to_map"
+          args="0 0 0 0 0 0 1 nusim/world map"/>
+  
+    <!-- Launch the Python launch file with the green (SLAM) robot -->
+    <include file="$(find-pkg-share nuturtle_description)/load_one.launch.py">
+      <arg name="color" value="green"/>
+      <arg name="use_rviz" value="false"/>
+      <arg name="use_jsp" value="true"/> 
+    </include>
+  
+  </launch>

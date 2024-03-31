@@ -1,0 +1,89 @@
+<!-- Save me as a .svg file and open in inkscape to view -->
+<!-- Set the page side to 8.5inches by 11 inches.
+
+     The viewBox sets the conversion from pixels to inches and is
+     the frame in which you draw.
+
+     The viewBox frame, in this case has:
+       96 pixels per inch (a line 96 pixels long is one inch long).
+       The origin is in the upper-left corner of the page.
+       The x pixel value increases to the right.
+       The y pixel value increases down.
+       (This is a left-handed coordinate system).
+
+     When drawing, we will conceive of the image as follows:
+       1 unit in turtlelib (e.g., meters) corresponds to 1 inch in the svg.
+
+       The "fixed frame" is implicitly the midpoint of the page (in viewBox coordinates),
+       with x axis positive to the right and y axis positive up.
+
+       Therefore coordinate frame resulting from the identity transform
+       is drawn at the center of the page with axis right and y axis up.
+
+     The opening <svg> tag can be literally included in the file you produce.
+-->
+<svg width="8.500000in" height="11.000000in" viewBox="0 0 816.000000 1056.000000" xmlns="http://www.w3.org/2000/svg">
+
+<!-- This definition creates an arrow head that can be attached to a line (to draw a vector)
+   I got this by drawing an arrow in inkscape and seeing what was produced.
+   The whole <defs> tag can be literally included in the file you produce
+-->
+<defs>
+  <marker
+     style="overflow:visible"
+     id="Arrow1Sstart"
+     refX="0.0"
+     refY="0.0"
+     orient="auto">
+       <path
+         transform="scale(0.2) translate(6,0)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         />
+    </marker>
+</defs>
+
+<!-- Below there is one tag for each item you wish to draw -->
+
+<!-- The circle tag is used for drawing a point.
+     The only attributes you need to change are:
+     cx - The x coordinate of the circle's center in the viewBox frame.
+     cy - The y coordinate of the circle's center in the viewBox frame.
+     stroke - The color of the outline of the circle.
+     fill - the color of the fill of the circle.
+
+     For a point, the stroke and fill color can be the same.
+     Color can be specified in several ways in SVG but
+     it is sufficient for you to use string names of common colors
+     (e.g., "red", "green", "orange", etc.).
+-->
+<circle cx="500" cy="500" r="3" stroke="purple" fill="purple" stroke-width="1" />
+
+<!-- This line tag draws a vector.
+     The only attributes you need to change are:
+     x1 - The head's x coordinate in the viewBox frame.
+     y1 - The head's y coordinate in the viewBox frame.
+     x2 - The tail's x coordinate in the viewBox frame.
+     y2 - The tail's y coordinate in the viewBox frame.
+     stroke - The color of the vector.
+-->
+<line x1="312.000000" x2="408.000000" y1="624.000000" y2="528.000000" stroke="purple" stroke-width="5" marker-start="url(#Arrow1Sstart)" /> 
+
+<!-- The <g> tag groups objects together.
+     This tag makes a coordinate frame.
+     A coordinate frame {a} is drawn with two vectors:
+     1. A red "x" vector. It is (1, 0) in frame {a} coordinates
+     2. A green "y" vector. It is (0, 1) in frame {b} coordinates
+     3. Text (slightly offset from the origin) (via the <text> tag)
+        x - the x coordinate of the text in the viewBox frame
+        y - the y coordinate of the text in the viewBox frame
+        The body of the <text> tag contains the text to display
+-->
+<g>
+<line x1="504.000000" x2="408.000000" y1="528.000000" y2="528.000000" stroke="red" stroke-width="5" marker-start="url(#Arrow1Sstart)" /> 
+<line x1="408.000000" x2="408.000000" y1="432.000000" y2="528.000000" stroke="green" stroke-width="5" marker-start="url(#Arrow1Sstart)" />
+<text x="408.000000" y="528.250000">{a}</text>
+</g>
+
+<!-- The closing tag is required -->
+</svg>

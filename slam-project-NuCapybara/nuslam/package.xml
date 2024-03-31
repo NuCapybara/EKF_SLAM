@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>nuslam</name>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="jialuyu2024@u.northwestern.edu">jialuyu</maintainer>
+  <license>MIT</license>
+<buildtool_depend>ros2launch</buildtool_depend>
+  <exec_depend>ros2launch</exec_depend>
+  <buildtool_depend>rosidl_default_generators</buildtool_depend>
+  <exec_depend>rosidl_default_runtime</exec_depend>
+
+  <depend>rclcpp</depend>
+  <depend>geometry_msgs</depend>
+  <exec_depend>nuturle_description</exec_depend>
+  <exec_depend>turtlelib</exec_depend>
+  <exec_depend>nuturtlebot_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>tf2</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>catch2_ros</exec_depend>
+  <exec_depend>nusim</exec_depend>
+  <exec_depend>nuturtle_description</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>nuturtle_control</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+  <member_of_group>rosidl_interface_packages</member_of_group>
+  
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

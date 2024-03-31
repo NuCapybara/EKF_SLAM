@@ -1,0 +1,16 @@
+<launch>
+    <catch2_launch_file description='An example Catch2 integration test launch file'/>
+    <arg name="config_file" default="diff_params.yaml"/>
+  
+    <!-- Auxiliary nodes can be run like normal to test integration between nodes -->
+    <node pkg='nuturtle_control' exec='odometry'>
+        <param from="$(find-pkg-share nuturtle_description)/$(var config_file)"/>
+    </node>
+
+    <catch2_integration_test_node
+        pkg='nuturtle_control'
+        exec='turtle_odom_test_node'
+    >
+        <!-- <param name='test_duration' value='$(var test_duration)'/> -->
+    </catch2_integration_test_node>
+</launch>
